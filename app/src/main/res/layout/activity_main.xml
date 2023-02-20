@@ -23,5 +23,13 @@
         android:layout_weight="1"
         tools:layout="@layout/fragment_fragment2" />
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment3"
+        android:name="com.example.mcassigment2.Fragment1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        tools:layout="@layout/fragment3" />
+
 
 </LinearLayout>
