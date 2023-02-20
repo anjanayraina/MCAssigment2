@@ -10,9 +10,12 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 public class Fragment2 extends Fragment {
     Button startBtn;
+    View view;
+    ItemViewModel viewModel;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,15 +26,15 @@ public class Fragment2 extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View finalView = inflater.inflate(R.layout.fragment_fragment2, container, false);
+        viewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class);
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_fragment2, null);
-        startBtn = root.findViewById(R.id.button);
-        Log.d("StartButton", "the button is : " + startBtn.getText());
+        startBtn = finalView.findViewById(R.id.button);
+//        Log.d("Start" , "Start Button Called");
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               Toast toast =  Toast.makeText(getContext() , "Start Button Clicked" , Toast.LENGTH_LONG);
-               toast.setGravity(Gravity.TOP|Gravity.CENTER, 0 , 0);
-               toast.show();
+//                Log.d("Start" , "Start Button Called");
+               viewModel.setData("StartTime");
             }
         });
         return finalView  ;
