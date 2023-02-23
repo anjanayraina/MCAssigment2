@@ -12,6 +12,9 @@ import android.media.MediaPlayer;
 import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.telecom.TelecomManager;
+import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -30,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     String musicURL  = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
 
     PowerConnected reciever =new PowerConnected();;
+
+    CallReciver callComing;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,18 +68,23 @@ public class MainActivity extends AppCompatActivity {
                 int status = batteryStatus.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
                 boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING ||
                         status == BatteryManager.BATTERY_STATUS_FULL;
-                if(isCharging)Toast.makeText(getApplicationContext() , "Battery Charging" , Toast.LENGTH_LONG).show();
+                if(isCharging){
+                    Toast.makeText(getApplicationContext() , "Battery Charging" , Toast.LENGTH_LONG).show();
+                    Log.d("BatteryCharging" , "Battery is Charging");
+                }
             }
         };
 
         registerReceiver(chargingBattery , new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-
+        callComing = new CallReciver();
+        IntentFilter intentFilter = new IntentFilter(TelephonyManager.ACTION_PHONE_STATE_CHANGED);
         BroadcastReceiver phoneCall  = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-
+                Toast.makeText(getApplicationContext() , "Phone Call received !!" , Toast.LENGTH_LONG).show();
             }
         };
+        registerReceiver(callComing , intentFilter);
 
 
         viewModel.getSelectedItems().observe(this , item->{
@@ -84,12 +94,13 @@ public class MainActivity extends AppCompatActivity {
 
                 time = Long.parseLong(temp[1]);
                 Toast.makeText(getApplicationContext() , "Timer Set " , Toast.LENGTH_LONG).show();
+                Log.d("SetTimer", "Timer Set !!");
 
             }
 
             else if(temp[0].equals("StartTime")){
                 Toast.makeText(getApplicationContext(), "Timer Started" , Toast.LENGTH_LONG).show();
-
+                Log.d("StartTimer" , "Timer Started");
                 startTimer();
             }
 
@@ -108,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void startTimer(){
 
-        timer = new CountDownTimer(time  ,1000) {
+        timer = new CountDownTimer(time*1000  ,1000) {
             @Override
             public void onTick(long l) {
 
@@ -117,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 Toast.makeText(getApplicationContext() , "Timer Ended" , Toast.LENGTH_LONG).show();
+                Log.d("TimerEnded" , "The Timer has Ended");
                 startSong();
             }
         }.start();
@@ -127,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
         timer.cancel();
         player.stop();
         running =false;
+        Log.d("TimerEnded" , "The Timer has been Stopped");
     }
 
     public void startSong(){
