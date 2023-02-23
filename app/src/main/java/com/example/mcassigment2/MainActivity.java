@@ -77,14 +77,14 @@ public class MainActivity extends AppCompatActivity {
 
         registerReceiver(chargingBattery , new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         callComing = new CallReciver();
-        IntentFilter intentFilter = new IntentFilter(TelephonyManager.ACTION_PHONE_STATE_CHANGED);
+//        IntentFilter intentFilter = ;
         BroadcastReceiver phoneCall  = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 Toast.makeText(getApplicationContext() , "Phone Call received !!" , Toast.LENGTH_LONG).show();
             }
         };
-        registerReceiver(callComing , intentFilter);
+        registerReceiver(phoneCall , new IntentFilter(TelephonyManager.ACTION_PHONE_STATE_CHANGED));
 
 
         viewModel.getSelectedItems().observe(this , item->{

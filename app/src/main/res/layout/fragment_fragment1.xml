@@ -7,21 +7,18 @@
     >
 
     <!-- TODO: Update blank fragment layout -->
-    <EditText
-        android:id="@+id/setTime"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:text=""
-        android:hint="Enter the time"/>
+    <TimePicker
+        android:id="@+id/timePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="324dp" />
+
 
     <Button
-        android:layout_marginLeft="140dp"
-        android:layout_marginTop="130dp"
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="160dp"
+        android:layout_marginTop="350dp"
         android:text="Set Time" />
 
 </FrameLayout>
