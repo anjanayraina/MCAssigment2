@@ -26,7 +26,7 @@ public class Fragment1  extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         view = inflater.inflate(R.layout.fragment_fragment1, container, false);
         viewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class);
         Button enter = view.findViewById(R.id.button2);
@@ -44,6 +44,7 @@ public class Fragment1  extends Fragment {
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                     OffsetTime offset = OffsetTime.now();
                     totalTime = (hours  - offset.getHour())*60*60 + (minutes - offset.getMinute())*60;
+                    if(totalTime < 0)totalTime =0;
                 }
                 viewModel.setData("SetTime,"+totalTime);
             }

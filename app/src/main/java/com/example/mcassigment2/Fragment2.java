@@ -24,16 +24,16 @@ public class Fragment2 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View finalView = inflater.inflate(R.layout.fragment_fragment2, container, false);
         viewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class);
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_fragment2, null);
         startBtn = finalView.findViewById(R.id.button);
-//        Log.d("Start" , "Start Button Called");
+
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Log.d("Start" , "Start Button Called");
+
                viewModel.setData("StartTime");
             }
         });

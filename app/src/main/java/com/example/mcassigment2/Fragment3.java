@@ -21,7 +21,7 @@ public class Fragment3  extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View finalView = inflater.inflate(R.layout.fragment3, container, false);
         viewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class);
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment3, null);

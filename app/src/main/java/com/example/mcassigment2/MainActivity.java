@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 if(isCharging){
                     Toast.makeText(getApplicationContext() , "Battery Charging" , Toast.LENGTH_LONG).show();
                     Log.d("BatteryCharging" , "Battery is Charging");
+                    if(timer!=null)stopTimer();
                 }
             }
         };
@@ -140,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
         player.stop();
         running =false;
         Log.d("TimerEnded" , "The Timer has been Stopped");
+        Toast.makeText(getApplicationContext() , "Timer Stopped" , Toast.LENGTH_LONG).show();
     }
 
     public void startSong(){
